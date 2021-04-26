@@ -1,0 +1,244 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="EqpInspListDataSet" targetNamespace="http://tempuri.org/EqpInspListDataSet.xsd" xmlns:mstns="http://tempuri.org/EqpInspListDataSet.xsd" xmlns="http://tempuri.org/EqpInspListDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="EqpInspListDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="EqpInspListDataSet" msprop:Generator_UserDSName="EqpInspListDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="EQPINSP" msprop:Generator_TableClassName="EQPINSPDataTable" msprop:Generator_TableVarName="tableEQPINSP" msprop:Generator_RowChangedName="EQPINSPRowChanged" msprop:Generator_TablePropName="EQPINSP" msprop:Generator_RowDeletingName="EQPINSPRowDeleting" msprop:Generator_RowChangingName="EQPINSPRowChanging" msprop:Generator_RowEvHandlerName="EQPINSPRowChangeEventHandler" msprop:Generator_RowDeletedName="EQPINSPRowDeleted" msprop:Generator_RowClassName="EQPINSPRow" msprop:Generator_UserTableName="EQPINSP" msprop:Generator_RowEvArgName="EQPINSPRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="EQPID" msdata:Caption="装置ID" msprop:Generator_ColumnVarNameInTable="columnEQPID" msprop:Generator_ColumnPropNameInRow="EQPID" msprop:Generator_ColumnPropNameInTable="EQPIDColumn" msprop:Generator_UserColumnName="EQPID" type="xs:string" />
+              <xs:element name="INTERVAL" msdata:Caption="点検頻度" msprop:Generator_ColumnVarNameInTable="columnINTERVAL" msprop:Generator_ColumnPropNameInRow="INTERVAL" msprop:Generator_ColumnPropNameInTable="INTERVALColumn" msprop:Generator_UserColumnName="INTERVAL" type="xs:string" />
+              <xs:element name="EQPTYPE" msdata:Caption="装置タイプ" msprop:Generator_ColumnVarNameInTable="columnEQPTYPE" msprop:Generator_ColumnPropNameInRow="EQPTYPE" msprop:Generator_ColumnPropNameInTable="EQPTYPEColumn" msprop:Generator_UserColumnName="EQPTYPE" type="xs:string" />
+              <xs:element name="SERIALNUM" msdata:Caption="製造番号" msprop:Generator_ColumnVarNameInTable="columnSERIALNUM" msprop:Generator_ColumnPropNameInRow="SERIALNUM" msprop:Generator_ColumnPropNameInTable="SERIALNUMColumn" msprop:Generator_UserColumnName="SERIALNUM" type="xs:string" minOccurs="0" />
+              <xs:element name="ASSETNUM" msdata:Caption="資産番号" msprop:Generator_ColumnVarNameInTable="columnASSETNUM" msprop:Generator_ColumnPropNameInRow="ASSETNUM" msprop:Generator_ColumnPropNameInTable="ASSETNUMColumn" msprop:Generator_UserColumnName="ASSETNUM" type="xs:string" minOccurs="0" />
+              <xs:element name="STREPORTDATE" msdata:Caption="開始日" msprop:Generator_ColumnVarNameInTable="columnSTREPORTDATE" msprop:Generator_ColumnPropNameInRow="STREPORTDATE" msprop:Generator_ColumnPropNameInTable="STREPORTDATEColumn" msprop:Generator_UserColumnName="STREPORTDATE" type="xs:string" />
+              <xs:element name="ENREPORTDATE" msdata:Caption="終了日" msprop:nullValue="_throw" msprop:Generator_ColumnPropNameInRow="ENREPORTDATE" msprop:Generator_ColumnVarNameInTable="columnENREPORTDATE" msprop:Generator_ColumnPropNameInTable="ENREPORTDATEColumn" msprop:Generator_UserColumnName="ENREPORTDATE" type="xs:string" minOccurs="0" />
+              <xs:element name="FLOOR" msdata:Caption="フロア" msprop:Generator_ColumnVarNameInTable="columnFLOOR" msprop:Generator_ColumnPropNameInRow="FLOOR" msprop:Generator_ColumnPropNameInTable="FLOORColumn" msprop:Generator_UserColumnName="FLOOR" type="xs:string" minOccurs="0" />
+              <xs:element name="IMPLOPERATORNAME" msdata:Caption="実施者" msprop:Generator_ColumnVarNameInTable="columnIMPLOPERATORNAME" msprop:Generator_ColumnPropNameInRow="IMPLOPERATORNAME" msprop:Generator_ColumnPropNameInTable="IMPLOPERATORNAMEColumn" msprop:Generator_UserColumnName="IMPLOPERATORNAME" type="xs:string" minOccurs="0" />
+              <xs:element name="RESPOPERATORNAME" msdata:Caption="担当者" msprop:Generator_ColumnVarNameInTable="columnRESPOPERATORNAME" msprop:Generator_ColumnPropNameInRow="RESPOPERATORNAME" msprop:Generator_ColumnPropNameInTable="RESPOPERATORNAMEColumn" msprop:Generator_UserColumnName="RESPOPERATORNAME" type="xs:string" minOccurs="0" />
+              <xs:element name="RESULT" msdata:Caption="結果" msprop:Generator_ColumnVarNameInTable="columnRESULT" msprop:Generator_ColumnPropNameInRow="RESULT" msprop:Generator_ColumnPropNameInTable="RESULTColumn" msprop:Generator_UserColumnName="RESULT" type="xs:string" minOccurs="0" />
+              <xs:element name="REVISIONNUM" msdata:Caption="リビジョン" msprop:Generator_ColumnVarNameInTable="columnREVISIONNUM" msprop:Generator_ColumnPropNameInRow="REVISIONNUM" msprop:Generator_ColumnPropNameInTable="REVISIONNUMColumn" msprop:Generator_UserColumnName="REVISIONNUM" type="xs:string" minOccurs="0" />
+              <xs:element name="INSPECTIONNAME" msdata:Caption="点検名称" msprop:Generator_ColumnVarNameInTable="columnINSPECTIONNAME" msprop:Generator_ColumnPropNameInRow="INSPECTIONNAME" msprop:Generator_ColumnPropNameInTable="INSPECTIONNAMEColumn" msprop:Generator_UserColumnName="INSPECTIONNAME" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EQPINSPMETERHIST" msprop:Generator_TableClassName="EQPINSPMETERHISTDataTable" msprop:Generator_TableVarName="tableEQPINSPMETERHIST" msprop:Generator_RowChangedName="EQPINSPMETERHISTRowChanged" msprop:Generator_TablePropName="EQPINSPMETERHIST" msprop:Generator_RowDeletingName="EQPINSPMETERHISTRowDeleting" msprop:Generator_RowChangingName="EQPINSPMETERHISTRowChanging" msprop:Generator_RowEvHandlerName="EQPINSPMETERHISTRowChangeEventHandler" msprop:Generator_RowDeletedName="EQPINSPMETERHISTRowDeleted" msprop:Generator_RowClassName="EQPINSPMETERHISTRow" msprop:Generator_UserTableName="EQPINSPMETERHIST" msprop:Generator_RowEvArgName="EQPINSPMETERHISTRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="EQPID" msdata:Caption="装置ID" msprop:Generator_ColumnVarNameInTable="columnEQPID" msprop:Generator_ColumnPropNameInRow="EQPID" msprop:Generator_ColumnPropNameInTable="EQPIDColumn" msprop:Generator_UserColumnName="EQPID" type="xs:string" />
+              <xs:element name="INTERVAL" msdata:Caption="点検頻度" msprop:Generator_ColumnVarNameInTable="columnINTERVAL" msprop:Generator_ColumnPropNameInRow="INTERVAL" msprop:Generator_ColumnPropNameInTable="INTERVALColumn" msprop:Generator_UserColumnName="INTERVAL" type="xs:string" />
+              <xs:element name="STREPORTDATE" msdata:Caption="実施開始日" msprop:Generator_ColumnVarNameInTable="columnSTREPORTDATE" msprop:Generator_ColumnPropNameInRow="STREPORTDATE" msprop:Generator_ColumnPropNameInTable="STREPORTDATEColumn" msprop:Generator_UserColumnName="STREPORTDATE" type="xs:string" />
+              <xs:element name="ENREPORTDATE" msdata:Caption="実施終了日" msprop:Generator_ColumnVarNameInTable="columnENREPORTDATE" msprop:Generator_ColumnPropNameInRow="ENREPORTDATE" msprop:Generator_ColumnPropNameInTable="ENREPORTDATEColumn" msprop:Generator_UserColumnName="ENREPORTDATE" type="xs:string" minOccurs="0" />
+              <xs:element name="MODEL" msdata:Caption="型式" msprop:Generator_ColumnVarNameInTable="columnMODEL" msprop:Generator_ColumnPropNameInRow="MODEL" msprop:Generator_ColumnPropNameInTable="MODELColumn" msprop:Generator_UserColumnName="MODEL" type="xs:string" />
+              <xs:element name="SERIALNUM" msdata:Caption="製造番号" msprop:Generator_ColumnVarNameInTable="columnSERIALNUM" msprop:Generator_ColumnPropNameInRow="SERIALNUM" msprop:Generator_ColumnPropNameInTable="SERIALNUMColumn" msprop:Generator_UserColumnName="SERIALNUM" type="xs:string" />
+              <xs:element name="INOROUTPRDCT" msdata:Caption="社内品or社外品" msprop:Generator_ColumnVarNameInTable="columnINOROUTPRDCT" msprop:Generator_ColumnPropNameInRow="INOROUTPRDCT" msprop:Generator_ColumnPropNameInTable="INOROUTPRDCTColumn" msprop:Generator_UserColumnName="INOROUTPRDCT" type="xs:string" minOccurs="0" />
+              <xs:element name="LIMITDATE" msdata:Caption="有効期限" msprop:Generator_ColumnVarNameInTable="columnLIMITDATE" msprop:Generator_ColumnPropNameInRow="LIMITDATE" msprop:Generator_ColumnPropNameInTable="LIMITDATEColumn" msprop:Generator_UserColumnName="LIMITDATE" type="xs:string" minOccurs="0" />
+              <xs:element name="CONTROLNUM" msdata:Caption="管理番号" msprop:Generator_ColumnVarNameInTable="columnCONTROLNUM" msprop:Generator_ColumnPropNameInRow="CONTROLNUM" msprop:Generator_ColumnPropNameInTable="CONTROLNUMColumn" msprop:Generator_UserColumnName="CONTROLNUM" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EQPINSPMETER" msprop:Generator_TableClassName="EQPINSPMETERDataTable" msprop:Generator_TableVarName="tableEQPINSPMETER" msprop:Generator_RowChangedName="EQPINSPMETERRowChanged" msprop:Generator_TablePropName="EQPINSPMETER" msprop:Generator_RowDeletingName="EQPINSPMETERRowDeleting" msprop:Generator_RowChangingName="EQPINSPMETERRowChanging" msprop:Generator_RowEvHandlerName="EQPINSPMETERRowChangeEventHandler" msprop:Generator_RowDeletedName="EQPINSPMETERRowDeleted" msprop:Generator_RowClassName="EQPINSPMETERRow" msprop:Generator_UserTableName="EQPINSPMETER" msprop:Generator_RowEvArgName="EQPINSPMETERRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="MODEL" msdata:Caption="型式" msprop:Generator_ColumnVarNameInTable="columnMODEL" msprop:Generator_ColumnPropNameInRow="MODEL" msprop:Generator_ColumnPropNameInTable="MODELColumn" msprop:Generator_UserColumnName="MODEL" type="xs:string" />
+              <xs:element name="SERIALNUM" msdata:Caption="製造番号" msprop:Generator_ColumnVarNameInTable="columnSERIALNUM" msprop:Generator_ColumnPropNameInRow="SERIALNUM" msprop:Generator_ColumnPropNameInTable="SERIALNUMColumn" msprop:Generator_UserColumnName="SERIALNUM" type="xs:string" />
+              <xs:element name="DEVICENAME" msdata:Caption="機器名称" msprop:Generator_ColumnVarNameInTable="columnDEVICENAME" msprop:Generator_ColumnPropNameInRow="DEVICENAME" msprop:Generator_ColumnPropNameInTable="DEVICENAMEColumn" msprop:Generator_UserColumnName="DEVICENAME" type="xs:string" minOccurs="0" />
+              <xs:element name="MAKER" msdata:Caption="メーカー" msprop:Generator_ColumnVarNameInTable="columnMAKER" msprop:Generator_ColumnPropNameInRow="MAKER" msprop:Generator_ColumnPropNameInTable="MAKERColumn" msprop:Generator_UserColumnName="MAKER" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EQPITEMMST_H" msprop:Generator_TableClassName="EQPITEMMST_HDataTable" msprop:Generator_TableVarName="tableEQPITEMMST_H" msprop:Generator_RowChangedName="EQPITEMMST_HRowChanged" msprop:Generator_TablePropName="EQPITEMMST_H" msprop:Generator_RowDeletingName="EQPITEMMST_HRowDeleting" msprop:Generator_RowChangingName="EQPITEMMST_HRowChanging" msprop:Generator_RowEvHandlerName="EQPITEMMST_HRowChangeEventHandler" msprop:Generator_RowDeletedName="EQPITEMMST_HRowDeleted" msprop:Generator_RowClassName="EQPITEMMST_HRow" msprop:Generator_UserTableName="EQPITEMMST_H" msprop:Generator_RowEvArgName="EQPITEMMST_HRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="EQPTYPE" msdata:Caption="装置タイプ" msprop:Generator_ColumnVarNameInTable="columnEQPTYPE" msprop:Generator_ColumnPropNameInRow="EQPTYPE" msprop:Generator_ColumnPropNameInTable="EQPTYPEColumn" msprop:Generator_UserColumnName="EQPTYPE" type="xs:string" />
+              <xs:element name="ITEMCODE" msdata:Caption="点検項目コード" msprop:Generator_ColumnVarNameInTable="columnITEMCODE" msprop:Generator_ColumnPropNameInRow="ITEMCODE" msprop:Generator_ColumnPropNameInTable="ITEMCODEColumn" msprop:Generator_UserColumnName="ITEMCODE" type="xs:string" />
+              <xs:element name="ITEMNAME" msdata:Caption="点検項目名" msprop:Generator_ColumnVarNameInTable="columnITEMNAME" msprop:Generator_ColumnPropNameInRow="ITEMNAME" msprop:Generator_ColumnPropNameInTable="ITEMNAMEColumn" msprop:Generator_UserColumnName="ITEMNAME" type="xs:string" minOccurs="0" />
+              <xs:element name="SUBITEM1" msdata:Caption="サブ項目1" msprop:Generator_ColumnVarNameInTable="columnSUBITEM1" msprop:Generator_ColumnPropNameInRow="SUBITEM1" msprop:Generator_ColumnPropNameInTable="SUBITEM1Column" msprop:Generator_UserColumnName="SUBITEM1" type="xs:string" minOccurs="0" />
+              <xs:element name="SUBITEM2" msdata:Caption="サブ項目2" msprop:Generator_ColumnVarNameInTable="columnSUBITEM2" msprop:Generator_ColumnPropNameInRow="SUBITEM2" msprop:Generator_ColumnPropNameInTable="SUBITEM2Column" msprop:Generator_UserColumnName="SUBITEM2" type="xs:string" minOccurs="0" />
+              <xs:element name="SUBITEM3" msdata:Caption="サブ項目3" msprop:Generator_ColumnVarNameInTable="columnSUBITEM3" msprop:Generator_ColumnPropNameInRow="SUBITEM3" msprop:Generator_ColumnPropNameInTable="SUBITEM3Column" msprop:Generator_UserColumnName="SUBITEM3" type="xs:string" minOccurs="0" />
+              <xs:element name="REVISIONNUM" msdata:Caption="リビジョン" msprop:Generator_ColumnVarNameInTable="columnREVISIONNUM" msprop:Generator_ColumnPropNameInRow="REVISIONNUM" msprop:Generator_ColumnPropNameInTable="REVISIONNUMColumn" msprop:Generator_UserColumnName="REVISIONNUM" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EQPITEMSUBMST_H" msprop:Generator_TableClassName="EQPITEMSUBMST_HDataTable" msprop:Generator_TableVarName="tableEQPITEMSUBMST_H" msprop:Generator_RowChangedName="EQPITEMSUBMST_HRowChanged" msprop:Generator_TablePropName="EQPITEMSUBMST_H" msprop:Generator_RowDeletingName="EQPITEMSUBMST_HRowDeleting" msprop:Generator_RowChangingName="EQPITEMSUBMST_HRowChanging" msprop:Generator_RowEvHandlerName="EQPITEMSUBMST_HRowChangeEventHandler" msprop:Generator_RowDeletedName="EQPITEMSUBMST_HRowDeleted" msprop:Generator_RowClassName="EQPITEMSUBMST_HRow" msprop:Generator_UserTableName="EQPITEMSUBMST_H" msprop:Generator_RowEvArgName="EQPITEMSUBMST_HRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="EQPTYPE" msdata:Caption="装置タイプ" msprop:Generator_ColumnVarNameInTable="columnEQPTYPE" msprop:Generator_ColumnPropNameInRow="EQPTYPE" msprop:Generator_ColumnPropNameInTable="EQPTYPEColumn" msprop:Generator_UserColumnName="EQPTYPE" type="xs:string" />
+              <xs:element name="ITEMCODE" msdata:Caption="点検項目コード" msprop:Generator_ColumnVarNameInTable="columnITEMCODE" msprop:Generator_ColumnPropNameInRow="ITEMCODE" msprop:Generator_ColumnPropNameInTable="ITEMCODEColumn" msprop:Generator_UserColumnName="ITEMCODE" type="xs:string" />
+              <xs:element name="SEQNUM" msdata:Caption="シーケンス" msprop:Generator_ColumnVarNameInTable="columnSEQNUM" msprop:Generator_ColumnPropNameInRow="SEQNUM" msprop:Generator_ColumnPropNameInTable="SEQNUMColumn" msprop:Generator_UserColumnName="SEQNUM" type="xs:string" />
+              <xs:element name="SUBITEMNAME" msdata:Caption="サブ点検項目名" msprop:Generator_ColumnVarNameInTable="columnSUBITEMNAME" msprop:Generator_ColumnPropNameInRow="SUBITEMNAME" msprop:Generator_ColumnPropNameInTable="SUBITEMNAMEColumn" msprop:Generator_UserColumnName="SUBITEMNAME" type="xs:string" minOccurs="0" />
+              <xs:element name="SUBITEMIMG" msdata:Caption="サブ点検項目画像" msprop:Generator_ColumnVarNameInTable="columnSUBITEMIMG" msprop:Generator_ColumnPropNameInRow="SUBITEMIMG" msprop:Generator_ColumnPropNameInTable="SUBITEMIMGColumn" msprop:Generator_UserColumnName="SUBITEMIMG" type="xs:string" minOccurs="0" />
+              <xs:element name="INSPECTIONPOINT" msdata:Caption="点検個所" msprop:Generator_ColumnVarNameInTable="columnINSPECTIONPOINT" msprop:Generator_ColumnPropNameInRow="INSPECTIONPOINT" msprop:Generator_ColumnPropNameInTable="INSPECTIONPOINTColumn" msprop:Generator_UserColumnName="INSPECTIONPOINT" type="xs:string" minOccurs="0" />
+              <xs:element name="JUDGMENTCRITERIA" msdata:Caption="判定基準" msprop:Generator_ColumnVarNameInTable="columnJUDGMENTCRITERIA" msprop:Generator_ColumnPropNameInRow="JUDGMENTCRITERIA" msprop:Generator_ColumnPropNameInTable="JUDGMENTCRITERIAColumn" msprop:Generator_UserColumnName="JUDGMENTCRITERIA" type="xs:string" minOccurs="0" />
+              <xs:element name="COMMENTS" msdata:Caption="コメント" msprop:Generator_ColumnVarNameInTable="columnCOMMENTS" msprop:Generator_ColumnPropNameInRow="COMMENTS" msprop:Generator_ColumnPropNameInTable="COMMENTSColumn" msprop:Generator_UserColumnName="COMMENTS" type="xs:string" minOccurs="0" />
+              <xs:element name="BEFTYTLE" msdata:Caption="処置前項目のタイトル" msprop:Generator_ColumnVarNameInTable="columnBEFTYTLE" msprop:Generator_ColumnPropNameInRow="BEFTYTLE" msprop:Generator_ColumnPropNameInTable="BEFTYTLEColumn" msprop:Generator_UserColumnName="BEFTYTLE" type="xs:string" minOccurs="0" />
+              <xs:element name="AFTTYTLE" msdata:Caption="処置後項目のタイトル" msprop:Generator_ColumnVarNameInTable="columnAFTTYTLE" msprop:Generator_ColumnPropNameInRow="AFTTYTLE" msprop:Generator_ColumnPropNameInTable="AFTTYTLEColumn" msprop:Generator_UserColumnName="AFTTYTLE" type="xs:string" minOccurs="0" />
+              <xs:element name="AUTOJUDGEFLG" msdata:Caption="自動判定フラグ" msprop:Generator_ColumnVarNameInTable="columnAUTOJUDGEFLG" msprop:Generator_ColumnPropNameInRow="AUTOJUDGEFLG" msprop:Generator_ColumnPropNameInTable="AUTOJUDGEFLGColumn" msprop:Generator_UserColumnName="AUTOJUDGEFLG" type="xs:string" minOccurs="0" />
+              <xs:element name="REVISIONNUM" msdata:Caption="リビジョン" msprop:Generator_ColumnVarNameInTable="columnREVISIONNUM" msprop:Generator_ColumnPropNameInRow="REVISIONNUM" msprop:Generator_ColumnPropNameInTable="REVISIONNUMColumn" msprop:Generator_UserColumnName="REVISIONNUM" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EQPINSPITEM" msprop:Generator_TableClassName="EQPINSPITEMDataTable" msprop:Generator_TableVarName="tableEQPINSPITEM" msprop:Generator_RowChangedName="EQPINSPITEMRowChanged" msprop:Generator_TablePropName="EQPINSPITEM" msprop:Generator_RowDeletingName="EQPINSPITEMRowDeleting" msprop:Generator_RowChangingName="EQPINSPITEMRowChanging" msprop:Generator_RowEvHandlerName="EQPINSPITEMRowChangeEventHandler" msprop:Generator_RowDeletedName="EQPINSPITEMRowDeleted" msprop:Generator_RowClassName="EQPINSPITEMRow" msprop:Generator_UserTableName="EQPINSPITEM" msprop:Generator_RowEvArgName="EQPINSPITEMRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="EQPID" msdata:Caption="装置ID" msprop:Generator_ColumnVarNameInTable="columnEQPID" msprop:Generator_ColumnPropNameInRow="EQPID" msprop:Generator_ColumnPropNameInTable="EQPIDColumn" msprop:Generator_UserColumnName="EQPID" type="xs:string" />
+              <xs:element name="INTERVAL" msprop:Generator_ColumnVarNameInTable="columnINTERVAL" msprop:Generator_ColumnPropNameInRow="INTERVAL" msprop:Generator_ColumnPropNameInTable="INTERVALColumn" msprop:Generator_UserColumnName="INTERVAL" type="xs:string" />
+              <xs:element name="STREPORTDATE" msdata:Caption="実施開始日" msprop:Generator_ColumnVarNameInTable="columnSTREPORTDATE" msprop:Generator_ColumnPropNameInRow="STREPORTDATE" msprop:Generator_ColumnPropNameInTable="STREPORTDATEColumn" msprop:Generator_UserColumnName="STREPORTDATE" type="xs:string" />
+              <xs:element name="ENREPORTDATE" msdata:Caption="実施終了日" msprop:Generator_ColumnVarNameInTable="columnENREPORTDATE" msprop:Generator_ColumnPropNameInRow="ENREPORTDATE" msprop:Generator_ColumnPropNameInTable="ENREPORTDATEColumn" msprop:Generator_UserColumnName="ENREPORTDATE" type="xs:string" minOccurs="0" />
+              <xs:element name="ITEMCODE" msdata:Caption="点検項目コード" msprop:Generator_ColumnVarNameInTable="columnITEMCODE" msprop:Generator_ColumnPropNameInRow="ITEMCODE" msprop:Generator_ColumnPropNameInTable="ITEMCODEColumn" msprop:Generator_UserColumnName="ITEMCODE" type="xs:string" />
+              <xs:element name="SEQNUM" msdata:Caption="シーケンス" msprop:Generator_ColumnVarNameInTable="columnSEQNUM" msprop:Generator_ColumnPropNameInRow="SEQNUM" msprop:Generator_ColumnPropNameInTable="SEQNUMColumn" msprop:Generator_UserColumnName="SEQNUM" type="xs:string" />
+              <xs:element name="BEFRESULT" msdata:Caption="判定（処置前）" msprop:Generator_ColumnVarNameInTable="columnBEFRESULT" msprop:Generator_ColumnPropNameInRow="BEFRESULT" msprop:Generator_ColumnPropNameInTable="BEFRESULTColumn" msprop:Generator_UserColumnName="BEFRESULT" type="xs:string" minOccurs="0" />
+              <xs:element name="AFTRESULT" msdata:Caption="判定（処置後）" msprop:Generator_ColumnVarNameInTable="columnAFTRESULT" msprop:Generator_ColumnPropNameInRow="AFTRESULT" msprop:Generator_ColumnPropNameInTable="AFTRESULTColumn" msprop:Generator_UserColumnName="AFTRESULT" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EQPITEMSUBEXPMST_H" msprop:Generator_TableClassName="EQPITEMSUBEXPMST_HDataTable" msprop:Generator_TableVarName="tableEQPITEMSUBEXPMST_H" msprop:Generator_RowChangedName="EQPITEMSUBEXPMST_HRowChanged" msprop:Generator_TablePropName="EQPITEMSUBEXPMST_H" msprop:Generator_RowDeletingName="EQPITEMSUBEXPMST_HRowDeleting" msprop:Generator_RowChangingName="EQPITEMSUBEXPMST_HRowChanging" msprop:Generator_RowEvHandlerName="EQPITEMSUBEXPMST_HRowChangeEventHandler" msprop:Generator_RowDeletedName="EQPITEMSUBEXPMST_HRowDeleted" msprop:Generator_RowClassName="EQPITEMSUBEXPMST_HRow" msprop:Generator_UserTableName="EQPITEMSUBEXPMST_H" msprop:Generator_RowEvArgName="EQPITEMSUBEXPMST_HRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="EQPTYPE" msdata:Caption="装置タイプ" msprop:Generator_ColumnVarNameInTable="columnEQPTYPE" msprop:Generator_ColumnPropNameInRow="EQPTYPE" msprop:Generator_ColumnPropNameInTable="EQPTYPEColumn" msprop:Generator_UserColumnName="EQPTYPE" type="xs:string" />
+              <xs:element name="ITEMCODE" msdata:Caption="点検項目コード" msprop:Generator_ColumnVarNameInTable="columnITEMCODE" msprop:Generator_ColumnPropNameInRow="ITEMCODE" msprop:Generator_ColumnPropNameInTable="ITEMCODEColumn" msprop:Generator_UserColumnName="ITEMCODE" type="xs:string" />
+              <xs:element name="SEQNUM" msdata:Caption="シーケンス" msprop:Generator_ColumnVarNameInTable="columnSEQNUM" msprop:Generator_ColumnPropNameInRow="SEQNUM" msprop:Generator_ColumnPropNameInTable="SEQNUMColumn" msprop:Generator_UserColumnName="SEQNUM" type="xs:string" />
+              <xs:element name="EXPSEQNUM" msdata:Caption="拡張シーケンス" msprop:Generator_ColumnVarNameInTable="columnEXPSEQNUM" msprop:Generator_ColumnPropNameInRow="EXPSEQNUM" msprop:Generator_ColumnPropNameInTable="EXPSEQNUMColumn" msprop:Generator_UserColumnName="EXPSEQNUM" type="xs:string" />
+              <xs:element name="ITEMLABEL" msdata:Caption="項目ラベル" msprop:Generator_ColumnVarNameInTable="columnITEMLABEL" msprop:Generator_ColumnPropNameInRow="ITEMLABEL" msprop:Generator_ColumnPropNameInTable="ITEMLABELColumn" msprop:Generator_UserColumnName="ITEMLABEL" type="xs:string" minOccurs="0" />
+              <xs:element name="JUDGVALU1" msdata:Caption="判定値1" msprop:Generator_ColumnVarNameInTable="columnJUDGVALU1" msprop:Generator_ColumnPropNameInRow="JUDGVALU1" msprop:Generator_ColumnPropNameInTable="JUDGVALU1Column" msprop:Generator_UserColumnName="JUDGVALU1" type="xs:string" minOccurs="0" />
+              <xs:element name="JUDGVALU2" msdata:Caption="判定値2" msprop:Generator_ColumnVarNameInTable="columnJUDGVALU2" msprop:Generator_ColumnPropNameInRow="JUDGVALU2" msprop:Generator_ColumnPropNameInTable="JUDGVALU2Column" msprop:Generator_UserColumnName="JUDGVALU2" type="xs:string" minOccurs="0" />
+              <xs:element name="RANGECTG" msdata:Caption="範囲区分" msprop:Generator_ColumnVarNameInTable="columnRANGECTG" msprop:Generator_ColumnPropNameInRow="RANGECTG" msprop:Generator_ColumnPropNameInTable="RANGECTGColumn" msprop:Generator_UserColumnName="RANGECTG" type="xs:string" minOccurs="0" />
+              <xs:element name="REVISIONNUM" msdata:Caption="リビジョン" msprop:Generator_ColumnVarNameInTable="columnREVISIONNUM" msprop:Generator_ColumnPropNameInRow="REVISIONNUM" msprop:Generator_ColumnPropNameInTable="REVISIONNUMColumn" msprop:Generator_UserColumnName="REVISIONNUM" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EQPINSPITEMEXP" msprop:Generator_TableClassName="EQPINSPITEMEXPDataTable" msprop:Generator_TableVarName="tableEQPINSPITEMEXP" msprop:Generator_RowChangedName="EQPINSPITEMEXPRowChanged" msprop:Generator_TablePropName="EQPINSPITEMEXP" msprop:Generator_RowDeletingName="EQPINSPITEMEXPRowDeleting" msprop:Generator_RowChangingName="EQPINSPITEMEXPRowChanging" msprop:Generator_RowEvHandlerName="EQPINSPITEMEXPRowChangeEventHandler" msprop:Generator_RowDeletedName="EQPINSPITEMEXPRowDeleted" msprop:Generator_RowClassName="EQPINSPITEMEXPRow" msprop:Generator_UserTableName="EQPINSPITEMEXP" msprop:Generator_RowEvArgName="EQPINSPITEMEXPRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="EQPID" msdata:Caption="装置ID" msprop:Generator_ColumnVarNameInTable="columnEQPID" msprop:Generator_ColumnPropNameInRow="EQPID" msprop:Generator_ColumnPropNameInTable="EQPIDColumn" msprop:Generator_UserColumnName="EQPID" type="xs:string" />
+              <xs:element name="INTERVAL" msprop:Generator_ColumnVarNameInTable="columnINTERVAL" msprop:Generator_ColumnPropNameInRow="INTERVAL" msprop:Generator_ColumnPropNameInTable="INTERVALColumn" msprop:Generator_UserColumnName="INTERVAL" type="xs:string" />
+              <xs:element name="STREPORTDATE" msdata:Caption="実施開始日" msprop:Generator_ColumnVarNameInTable="columnSTREPORTDATE" msprop:Generator_ColumnPropNameInRow="STREPORTDATE" msprop:Generator_ColumnPropNameInTable="STREPORTDATEColumn" msprop:Generator_UserColumnName="STREPORTDATE" type="xs:string" />
+              <xs:element name="ENREPORTDATE" msdata:Caption="実施終了日" msprop:Generator_ColumnVarNameInTable="columnENREPORTDATE" msprop:Generator_ColumnPropNameInRow="ENREPORTDATE" msprop:Generator_ColumnPropNameInTable="ENREPORTDATEColumn" msprop:Generator_UserColumnName="ENREPORTDATE" type="xs:string" minOccurs="0" />
+              <xs:element name="ITEMCODE" msdata:Caption="点検項目コード" msprop:Generator_ColumnVarNameInTable="columnITEMCODE" msprop:Generator_ColumnPropNameInRow="ITEMCODE" msprop:Generator_ColumnPropNameInTable="ITEMCODEColumn" msprop:Generator_UserColumnName="ITEMCODE" type="xs:string" />
+              <xs:element name="SEQNUM" msdata:Caption="シーケンス" msprop:Generator_ColumnVarNameInTable="columnSEQNUM" msprop:Generator_ColumnPropNameInRow="SEQNUM" msprop:Generator_ColumnPropNameInTable="SEQNUMColumn" msprop:Generator_UserColumnName="SEQNUM" type="xs:string" />
+              <xs:element name="EXPSEQNUM" msdata:Caption="拡張シーケンス" msprop:Generator_ColumnVarNameInTable="columnEXPSEQNUM" msprop:Generator_ColumnPropNameInRow="EXPSEQNUM" msprop:Generator_ColumnPropNameInTable="EXPSEQNUMColumn" msprop:Generator_UserColumnName="EXPSEQNUM" type="xs:string" />
+              <xs:element name="BEFVALUE" msdata:Caption="測定値(処置前)" msprop:Generator_ColumnVarNameInTable="columnBEFVALUE" msprop:Generator_ColumnPropNameInRow="BEFVALUE" msprop:Generator_ColumnPropNameInTable="BEFVALUEColumn" msprop:Generator_UserColumnName="BEFVALUE" type="xs:string" minOccurs="0" />
+              <xs:element name="AFTVALUE" msdata:Caption="測定値(処置後)" msprop:Generator_ColumnVarNameInTable="columnAFTVALUE" msprop:Generator_ColumnPropNameInRow="AFTVALUE" msprop:Generator_ColumnPropNameInTable="AFTVALUEColumn" msprop:Generator_UserColumnName="AFTVALUE" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EQPMAINMST_H" msprop:Generator_TableClassName="EQPMAINMST_HDataTable" msprop:Generator_TableVarName="tableEQPMAINMST_H" msprop:Generator_RowChangedName="EQPMAINMST_HRowChanged" msprop:Generator_TablePropName="EQPMAINMST_H" msprop:Generator_RowDeletingName="EQPMAINMST_HRowDeleting" msprop:Generator_RowChangingName="EQPMAINMST_HRowChanging" msprop:Generator_RowEvHandlerName="EQPMAINMST_HRowChangeEventHandler" msprop:Generator_RowDeletedName="EQPMAINMST_HRowDeleted" msprop:Generator_RowClassName="EQPMAINMST_HRow" msprop:Generator_UserTableName="EQPMAINMST_H" msprop:Generator_RowEvArgName="EQPMAINMST_HRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="EQPTYPE" msprop:Generator_ColumnVarNameInTable="columnEQPTYPE" msprop:Generator_ColumnPropNameInRow="EQPTYPE" msprop:Generator_ColumnPropNameInTable="EQPTYPEColumn" msprop:Generator_UserColumnName="EQPTYPE" type="xs:string" />
+              <xs:element name="LINEFLG" msprop:Generator_ColumnVarNameInTable="columnLINEFLG" msprop:Generator_ColumnPropNameInRow="LINEFLG" msprop:Generator_ColumnPropNameInTable="LINEFLGColumn" msprop:Generator_UserColumnName="LINEFLG" type="xs:string" minOccurs="0" />
+              <xs:element name="INSPECTIONNAME" msprop:Generator_ColumnVarNameInTable="columnINSPECTIONNAME" msprop:Generator_ColumnPropNameInRow="INSPECTIONNAME" msprop:Generator_ColumnPropNameInTable="INSPECTIONNAMEColumn" msprop:Generator_UserColumnName="INSPECTIONNAME" type="xs:string" minOccurs="0" />
+              <xs:element name="REVISIONNUM" msprop:Generator_ColumnVarNameInTable="columnREVISIONNUM" msprop:Generator_ColumnPropNameInRow="REVISIONNUM" msprop:Generator_ColumnPropNameInTable="REVISIONNUMColumn" msprop:Generator_UserColumnName="REVISIONNUM" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EQPINSP_LIST" msprop:Generator_TableClassName="EQPINSP_LISTDataTable" msprop:Generator_TableVarName="tableEQPINSP_LIST" msprop:Generator_TablePropName="EQPINSP_LIST" msprop:Generator_RowDeletingName="EQPINSP_LISTRowDeleting" msprop:Generator_RowChangingName="EQPINSP_LISTRowChanging" msprop:Generator_RowEvHandlerName="EQPINSP_LISTRowChangeEventHandler" msprop:Generator_RowDeletedName="EQPINSP_LISTRowDeleted" msprop:Generator_UserTableName="EQPINSP_LIST" msprop:Generator_RowChangedName="EQPINSP_LISTRowChanged" msprop:Generator_RowEvArgName="EQPINSP_LISTRowChangeEvent" msprop:Generator_RowClassName="EQPINSP_LISTRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="INSPECTIONNAME" msdata:Caption="点検名称" msprop:Generator_ColumnVarNameInTable="columnINSPECTIONNAME" msprop:Generator_ColumnPropNameInRow="INSPECTIONNAME" msprop:Generator_ColumnPropNameInTable="INSPECTIONNAMEColumn" msprop:Generator_UserColumnName="INSPECTIONNAME" type="xs:string" minOccurs="0" />
+              <xs:element name="EQPID" msdata:Caption="装置ID" msprop:Generator_ColumnVarNameInTable="columnEQPID" msprop:Generator_ColumnPropNameInRow="EQPID" msprop:Generator_ColumnPropNameInTable="EQPIDColumn" msprop:Generator_UserColumnName="EQPID" type="xs:string" />
+              <xs:element name="RESULT" msdata:Caption="結果" msprop:Generator_ColumnVarNameInTable="columnRESULT" msprop:Generator_ColumnPropNameInRow="RESULT" msprop:Generator_ColumnPropNameInTable="RESULTColumn" msprop:Generator_UserColumnName="RESULT" type="xs:string" minOccurs="0" />
+              <xs:element name="INTERVAL" msdata:Caption="点検頻度" msprop:Generator_ColumnVarNameInTable="columnINTERVAL" msprop:Generator_ColumnPropNameInRow="INTERVAL" msprop:Generator_ColumnPropNameInTable="INTERVALColumn" msprop:Generator_UserColumnName="INTERVAL" type="xs:string" />
+              <xs:element name="STREPORTDATE" msdata:Caption="開始日" msprop:Generator_ColumnVarNameInTable="columnSTREPORTDATE" msprop:Generator_ColumnPropNameInRow="STREPORTDATE" msprop:Generator_ColumnPropNameInTable="STREPORTDATEColumn" msprop:Generator_UserColumnName="STREPORTDATE" type="xs:string" />
+              <xs:element name="ENREPORTDATE" msdata:Caption="終了日" msprop:Generator_ColumnVarNameInTable="columnENREPORTDATE" msprop:Generator_ColumnPropNameInRow="ENREPORTDATE" msprop:nullValue="_throw" msprop:Generator_ColumnPropNameInTable="ENREPORTDATEColumn" msprop:Generator_UserColumnName="ENREPORTDATE" type="xs:string" minOccurs="0" />
+              <xs:element name="FLOOR" msdata:Caption="フロア" msprop:Generator_ColumnVarNameInTable="columnFLOOR" msprop:Generator_ColumnPropNameInRow="FLOOR" msprop:Generator_ColumnPropNameInTable="FLOORColumn" msprop:Generator_UserColumnName="FLOOR" type="xs:string" minOccurs="0" />
+              <xs:element name="IMPLOPERATORNAME" msdata:Caption="実施者" msprop:Generator_ColumnVarNameInTable="columnIMPLOPERATORNAME" msprop:Generator_ColumnPropNameInRow="IMPLOPERATORNAME" msprop:Generator_ColumnPropNameInTable="IMPLOPERATORNAMEColumn" msprop:Generator_UserColumnName="IMPLOPERATORNAME" type="xs:string" minOccurs="0" />
+              <xs:element name="RESPOPERATORNAME" msdata:Caption="担当者" msprop:Generator_ColumnVarNameInTable="columnRESPOPERATORNAME" msprop:Generator_ColumnPropNameInRow="RESPOPERATORNAME" msprop:Generator_ColumnPropNameInTable="RESPOPERATORNAMEColumn" msprop:Generator_UserColumnName="RESPOPERATORNAME" type="xs:string" minOccurs="0" />
+              <xs:element name="SERIALNUM" msdata:Caption="製造番号" msprop:Generator_ColumnVarNameInTable="columnSERIALNUM" msprop:Generator_ColumnPropNameInRow="SERIALNUM" msprop:Generator_ColumnPropNameInTable="SERIALNUMColumn" msprop:Generator_UserColumnName="SERIALNUM" type="xs:string" minOccurs="0" />
+              <xs:element name="ASSETNUM" msdata:Caption="資産番号" msprop:Generator_ColumnVarNameInTable="columnASSETNUM" msprop:Generator_ColumnPropNameInRow="ASSETNUM" msprop:Generator_ColumnPropNameInTable="ASSETNUMColumn" msprop:Generator_UserColumnName="ASSETNUM" type="xs:string" minOccurs="0" />
+              <xs:element name="EQPTYPE" msdata:Caption="装置タイプ" msprop:Generator_ColumnVarNameInTable="columnEQPTYPE" msprop:Generator_ColumnPropNameInRow="EQPTYPE" msprop:Generator_ColumnPropNameInTable="EQPTYPEColumn" msprop:Generator_UserColumnName="EQPTYPE" type="xs:string" />
+              <xs:element name="REVISIONNUM" msdata:Caption="リビジョン" msprop:Generator_ColumnVarNameInTable="columnREVISIONNUM" msprop:Generator_ColumnPropNameInRow="REVISIONNUM" msprop:Generator_ColumnPropNameInTable="REVISIONNUMColumn" msprop:Generator_UserColumnName="REVISIONNUM" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:EQPINSP" />
+      <xs:field xpath="mstns:EQPID" />
+      <xs:field xpath="mstns:INTERVAL" />
+      <xs:field xpath="mstns:STREPORTDATE" />
+    </xs:unique>
+    <xs:unique name="EQPINSPMETERHIST_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:EQPINSPMETERHIST" />
+      <xs:field xpath="mstns:EQPID" />
+      <xs:field xpath="mstns:INTERVAL" />
+      <xs:field xpath="mstns:STREPORTDATE" />
+      <xs:field xpath="mstns:MODEL" />
+      <xs:field xpath="mstns:SERIALNUM" />
+    </xs:unique>
+    <xs:unique name="EQPINSPMETER_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:EQPINSPMETER" />
+      <xs:field xpath="mstns:MODEL" />
+      <xs:field xpath="mstns:SERIALNUM" />
+    </xs:unique>
+    <xs:unique name="EQPITEMMST_H_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:EQPITEMMST_H" />
+      <xs:field xpath="mstns:EQPTYPE" />
+      <xs:field xpath="mstns:ITEMCODE" />
+      <xs:field xpath="mstns:REVISIONNUM" />
+    </xs:unique>
+    <xs:unique name="EQPITEMSUBMST_H_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:EQPITEMSUBMST_H" />
+      <xs:field xpath="mstns:EQPTYPE" />
+      <xs:field xpath="mstns:ITEMCODE" />
+      <xs:field xpath="mstns:SEQNUM" />
+      <xs:field xpath="mstns:REVISIONNUM" />
+    </xs:unique>
+    <xs:unique name="EQPINSPITEM_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:EQPINSPITEM" />
+      <xs:field xpath="mstns:EQPID" />
+      <xs:field xpath="mstns:INTERVAL" />
+      <xs:field xpath="mstns:STREPORTDATE" />
+      <xs:field xpath="mstns:ITEMCODE" />
+      <xs:field xpath="mstns:SEQNUM" />
+    </xs:unique>
+    <xs:unique name="EQPITEMSUBEXPMST_H_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:EQPITEMSUBEXPMST_H" />
+      <xs:field xpath="mstns:EQPTYPE" />
+      <xs:field xpath="mstns:ITEMCODE" />
+      <xs:field xpath="mstns:SEQNUM" />
+      <xs:field xpath="mstns:EXPSEQNUM" />
+      <xs:field xpath="mstns:REVISIONNUM" />
+    </xs:unique>
+    <xs:unique name="EQPINSPITEMEXP_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:EQPINSPITEMEXP" />
+      <xs:field xpath="mstns:EQPID" />
+      <xs:field xpath="mstns:INTERVAL" />
+      <xs:field xpath="mstns:STREPORTDATE" />
+      <xs:field xpath="mstns:ITEMCODE" />
+      <xs:field xpath="mstns:SEQNUM" />
+      <xs:field xpath="mstns:EXPSEQNUM" />
+    </xs:unique>
+    <xs:unique name="EQPMAINMST_H_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:EQPMAINMST_H" />
+      <xs:field xpath="mstns:EQPTYPE" />
+      <xs:field xpath="mstns:REVISIONNUM" />
+    </xs:unique>
+    <xs:unique name="EQPINSP_LIST_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:EQPINSP_LIST" />
+      <xs:field xpath="mstns:EQPID" />
+      <xs:field xpath="mstns:INTERVAL" />
+      <xs:field xpath="mstns:STREPORTDATE" />
+    </xs:unique>
+  </xs:element>
+  <xs:annotation>
+    <xs:appinfo>
+      <msdata:Relationship name="EQPINSPMETER_EQPINSPMETERHIST" msdata:parent="EQPINSPMETER" msdata:child="EQPINSPMETERHIST" msdata:parentkey="MODEL SERIALNUM" msdata:childkey="MODEL SERIALNUM" msprop:Generator_UserChildTable="EQPINSPMETERHIST" msprop:Generator_ChildPropName="GetEQPINSPMETERHISTRows" msprop:Generator_UserRelationName="EQPINSPMETER_EQPINSPMETERHIST" msprop:Generator_ParentPropName="EQPINSPMETERRowParent" msprop:Generator_RelationVarName="relationEQPINSPMETER_EQPINSPMETERHIST" msprop:Generator_UserParentTable="EQPINSPMETER" />
+      <msdata:Relationship name="EQPITEMMST_EQPITEMSUBMST" msdata:parent="EQPITEMMST_H" msdata:child="EQPITEMSUBMST_H" msdata:parentkey="EQPTYPE ITEMCODE" msdata:childkey="EQPTYPE ITEMCODE" msprop:Generator_UserChildTable="EQPITEMSUBMST_H" msprop:Generator_ChildPropName="GetEQPITEMSUBMST_HRows" msprop:Generator_UserRelationName="EQPITEMMST_EQPITEMSUBMST" msprop:Generator_RelationVarName="relationEQPITEMMST_EQPITEMSUBMST" msprop:Generator_UserParentTable="EQPITEMMST_H" msprop:Generator_ParentPropName="EQPITEMMSTRowParent" />
+      <msdata:Relationship name="EQPITEMSUBMST_EQPITEMSUBEXPMST" msdata:parent="EQPITEMSUBMST_H" msdata:child="EQPITEMSUBEXPMST_H" msdata:parentkey="EQPTYPE ITEMCODE SEQNUM" msdata:childkey="EQPTYPE ITEMCODE SEQNUM" msprop:Generator_UserChildTable="EQPITEMSUBEXPMST_H" msprop:Generator_ChildPropName="GetEQPITEMSUBEXPMST_HRows" msprop:Generator_UserRelationName="EQPITEMSUBMST_EQPITEMSUBEXPMST" msprop:Generator_RelationVarName="relationEQPITEMSUBMST_EQPITEMSUBEXPMST" msprop:Generator_UserParentTable="EQPITEMSUBMST_H" msprop:Generator_ParentPropName="EQPITEMSUBMSTRowParent" />
+      <msdata:Relationship name="EQPITEMSUBMST_EQPINSPITEM" msdata:parent="EQPITEMSUBMST_H" msdata:child="EQPINSPITEM" msdata:parentkey="ITEMCODE SEQNUM" msdata:childkey="ITEMCODE SEQNUM" msprop:Generator_UserChildTable="EQPINSPITEM" msprop:Generator_ChildPropName="GetEQPINSPITEMRows" msprop:Generator_UserRelationName="EQPITEMSUBMST_EQPINSPITEM" msprop:Generator_RelationVarName="relationEQPITEMSUBMST_EQPINSPITEM" msprop:Generator_UserParentTable="EQPITEMSUBMST_H" msprop:Generator_ParentPropName="EQPITEMSUBMSTRowParent" />
+      <msdata:Relationship name="EQPITEMSUBEXPMST_EQPINSPITEMEXP" msdata:parent="EQPITEMSUBEXPMST_H" msdata:child="EQPINSPITEMEXP" msdata:parentkey="ITEMCODE SEQNUM EXPSEQNUM" msdata:childkey="ITEMCODE SEQNUM EXPSEQNUM" msprop:Generator_UserChildTable="EQPINSPITEMEXP" msprop:Generator_ChildPropName="GetEQPINSPITEMEXPRows" msprop:Generator_UserRelationName="EQPITEMSUBEXPMST_EQPINSPITEMEXP" msprop:Generator_RelationVarName="relationEQPITEMSUBEXPMST_EQPINSPITEMEXP" msprop:Generator_UserParentTable="EQPITEMSUBEXPMST_H" msprop:Generator_ParentPropName="EQPITEMSUBEXPMSTRowParent" />
+      <msdata:Relationship name="EQPMAINMST_EQPINSP" msdata:parent="EQPMAINMST_H" msdata:child="EQPINSP" msdata:parentkey="EQPTYPE REVISIONNUM" msdata:childkey="EQPTYPE REVISIONNUM" msprop:Generator_UserChildTable="EQPINSP" msprop:Generator_ChildPropName="GetEQPINSPRows" msprop:Generator_UserRelationName="EQPMAINMST_EQPINSP" msprop:Generator_RelationVarName="relationEQPMAINMST_EQPINSP" msprop:Generator_UserParentTable="EQPMAINMST_H" msprop:Generator_ParentPropName="EQPMAINMST_HRowParent" />
+    </xs:appinfo>
+  </xs:annotation>
+</xs:schema>
