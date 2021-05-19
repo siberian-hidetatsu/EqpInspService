@@ -1,4 +1,5 @@
-﻿using System;
+﻿#define	UPDATE_20210519
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -43,6 +44,16 @@ namespace EqpInspService.Controllers
 
 				string revisionnum = "1";
 
+#if UPDATE_20210519
+				bool allmaster = false;		// true: 履歴の有り無しに関わらず、全てのマスタを読み込む false:履歴ありのマスタのみ
+
+				if ( interval.Length > 1 )
+				{
+					allmaster = (interval[1] == 'a');	// とりあえず、interval の２バイト目を allmaster フラグとして利用する。
+					interval = interval[0].ToString();
+				}
+#endif
+
 				using (OracleConnection m2mConn = new OracleConnection(m2mConnString))
 				{
 					m2mConn.Open();
@@ -50,6 +61,44 @@ namespace EqpInspService.Controllers
 					List<string[]> values = null;
 
 					string sql;
+
+#if UPDATE_20210519
+					#region 装置点検履歴
+					StringBuilder resultCaseEnd = new StringBuilder();
+					string compreRESULT = ConfigurationManager.AppSettings["CompreRESULT"];
+					Common.MakeCaseEndSentence(resultCaseEnd, compreRESULT, "result");
+
+					sql =
+						"select\r\n" +
+						" eqpid,\r\n" +
+						" eqpinsp.interval,\r\n" +
+						" eqpinsp.eqptype,\r\n" +
+						" serialnum,\r\n" +
+						" assetnum,\r\n" +
+						" to_char(streportdate,'yyyy/mm/dd') as streportdate,\r\n" +
+						" to_char(enreportdate,'yyyy/mm/dd') as enreportdate,\r\n" +
+						" floor,\r\n" +
+						" imploperatorname,\r\n" +
+						" respoperatorname,\r\n" +
+						" " + resultCaseEnd + ",\r\n" +
+						" eqpinsp.revisionnum,\r\n" +
+						" em.inspectionname\r\n" +
+						"from\r\n" +
+						" eqpinsp\r\n" +
+						" left outer join eqpmainmst_h em on (eqpinsp.eqptype = em.eqptype and eqpinsp.revisionnum = em.revisionnum)\r\n" +
+						"where\r\n" +
+						" eqpid='" + eqpid + "'\r\n" +
+						" and streportdate = '" + streportdate + "'\r\n" +
+						" and eqpinsp.interval='" + interval + "'\r\n" +
+						" and enreportdate = '" + enreportdate + "'\r\n";
+
+					using (OracleDataAdapter da = new OracleDataAdapter(sql, m2mConn))
+					{
+						// 装置点検
+						da.Fill(eqpInspListDataSet.EQPINSP);
+					}
+					#endregion
+#endif
 
 					#region 点検項目履歴
 					#region 装置点検項目履歴を読み込む
@@ -166,7 +215,11 @@ namespace EqpInspService.Controllers
 						" eqpitemmst" + revision_table + "\r\n" +
 						"where\r\n" +
 						" eqptype='" + eqptype + "'\r\n" +
+#if UPDATE_20210519
+						(allmaster ? "" : " and itemcode in (" + itemcode_con + ")\r\n") +
+#else
 						" and itemcode in (" + itemcode_con + ")\r\n" +
+#endif
 						revision_con +
 						"order by\r\n" +
 						" itemcode\r\n";
@@ -178,7 +231,7 @@ namespace EqpInspService.Controllers
 						// 点検項目マスタ
 						da.Fill(eqpInspListDataSet.EQPITEMMST_H);
 					}
-					#endregion
+#endregion
 
 					#region 装置点検[拡張]項目(EQPINSPITEM[EXP])の履歴から遡って点検項目SUBマスタを検索する
 					// 装置点検項目と装置点検拡張項目に含まれるに itemcode と seqnum の組み合わせを抽出する
@@ -225,7 +278,11 @@ namespace EqpInspService.Controllers
 						" eqpitemsubmst" + revision_table + "\r\n" +
 						"where\r\n" +
 						" eqptype='" + eqptype + "'\r\n" +
+#if UPDATE_20210519
+						(allmaster? "": " and " + itemcode_seqnum_con + "\r\n") +
+#else
 						" and " + itemcode_seqnum_con + "\r\n" +
+#endif
 						revision_con +
 						"order by\r\n" +
 						" itemcode,\r\n" +
@@ -238,7 +295,7 @@ namespace EqpInspService.Controllers
 						// 点検項目SUBマスタ
 						da.Fill(eqpInspListDataSet.EQPITEMSUBMST_H);
 					}
-					#endregion
+#endregion
 
 					#region 点検項目SUBマスタに紐付いている点検項目SUB拡張マスタを検索する
 					sql = "select\r\n" +
@@ -283,10 +340,10 @@ namespace EqpInspService.Controllers
 						string subitem1 = DBNull.Value.Equals(eqpitemmst_row["SUBITEM1"]) ? "" : eqpitemmst_row.SUBITEM1;
 						string subitem2 = DBNull.Value.Equals(eqpitemmst_row["SUBITEM2"]) ? "" : eqpitemmst_row.SUBITEM2;
 
-						#region 点検項目ごとの <div> とタイトルの <span>
-						#endregion
+					#region 点検項目ごとの <div> とタイトルの <span>
+					#endregion
 
-						#region EqpInspItem セット
+					#region EqpInspItem セット
 						EqpInpsItem eqpInpsItem = new EqpInpsItem();
 
 						eqpInpsItem.EqpType = eqptype;
@@ -294,7 +351,7 @@ namespace EqpInspService.Controllers
 						eqpInpsItem.ItemName = itemnm;
 
 						eqpInpsItem.EqpInspSubItems = new EqpInspSubItem[0];
-						#endregion
+					#endregion
 
 						// SEQNUM(シーケンス) 分繰り返す
 						foreach (EqpInspListDataSet.EQPITEMSUBMST_HRow eqpitemsubmst_row in eqpitemsubmst_rows)
@@ -318,13 +375,13 @@ namespace EqpInspService.Controllers
 
 							// 空の <dt></dt>
 
-							#region サブタイトル用の <dd> ==== ココから ====
+					#region サブタイトル用の <dd> ==== ココから ====
 							// サブタイトル用の <dd> ==== ココまで ====
-							#endregion
+					#endregion
 
 							// 空の <dt></dt>
 
-							#region サブ点検画像の <dd><img> ==== ココから ====
+					#region サブ点検画像の <dd><img> ==== ココから ====
 							string subitemimg_base64 = "";
 							if (!string.IsNullOrEmpty(subitemimg.Trim()))
 							{
@@ -406,23 +463,23 @@ namespace EqpInspService.Controllers
 								}
 #endif
 							}
-							#endregion <dd><img> ==== ココまで ====
+					#endregion <dd><img> ==== ココまで ====
 
-							#region 処置前の親要素の <dd> ==== ココから ====
+					#region 処置前の親要素の <dd> ==== ココから ====
 							// ここに <div> で囲んだコントロールを追加していく
-							#endregion 処置前の親要素の <dd> ==== ココまで ====
+					#endregion 処置前の親要素の <dd> ==== ココまで ====
 
-							#region 処置後の親要素の <dd> ==== ココから ====
+					#region 処置後の親要素の <dd> ==== ココから ====
 							// ここに <div> で囲んだコントロールを追加していく
-							#endregion 処置後の親要素の <dd> ==== ココまで ====
+					#endregion 処置後の親要素の <dd> ==== ココまで ====
 
-							#region 処置前項目のタイトルの <div> ==== ココから ====
+					#region 処置前項目のタイトルの <div> ==== ココから ====
 							// 処置前項目のタイトルの <dd> ==== ココまで ====
-							#endregion
+					#endregion
 
-							#region 処置後項目のタイトルの <div> ==== ココから ====
+					#region 処置後項目のタイトルの <div> ==== ココから ====
 							// 処置後項目のタイトルの <div> ==== ココまで ====
-							#endregion
+					#endregion
 
 							string befresult = "", aftresult = "";
 							var eqpinspitem_rows = eqpitemsubmst_row.GetChildRows("EQPITEMSUBMST_EQPINSPITEM");
@@ -433,7 +490,7 @@ namespace EqpInspService.Controllers
 								aftresult = eqpinspitem_row.AFTRESULT.Trim();
 							}
 
-							#region EqpInspSubItem セット
+					#region EqpInspSubItem セット
 							EqpInspSubItem eqpInspSubItem = new EqpInspSubItem();
 							eqpInspSubItem.SeqNum = seqnum;
 							eqpInspSubItem.SubItemName = subitemname;
@@ -449,16 +506,16 @@ namespace EqpInspService.Controllers
 
 							Array.Resize(ref eqpInpsItem.EqpInspSubItems, eqpInpsItem.EqpInspSubItems.Length + 1);
 							eqpInpsItem.EqpInspSubItems[eqpInpsItem.EqpInspSubItems.Length - 1] = eqpInspSubItem;
-							#endregion
+					#endregion
 
 							var eqpitemsubexpmst_rows = eqpitemsubmst_row.GetChildRows("EQPITEMSUBMST_EQPITEMSUBEXPMST");
 							if (eqpitemsubexpmst_rows.Any())  // 何らかの点検項目の入力があった？
 							{
-								#region 処置前の <table>
-								#endregion
+					#region 処置前の <table>
+					#endregion
 
-								#region 処置後の <table>
-								#endregion
+					#region 処置後の <table>
+					#endregion
 
 								// EXPSEQNUM(拡張シーケンス) 分繰り返す
 								foreach (EqpInspListDataSet.EQPITEMSUBEXPMST_HRow eqpitemsubexpmst_row in eqpitemsubexpmst_rows)
@@ -477,15 +534,15 @@ namespace EqpInspService.Controllers
 										aftvalue = eqpinspitemexp_row.AFTVALUE;
 									}
 
-									#region 処置前の <tr> ==== ココから ====
+					#region 処置前の <tr> ==== ココから ====
 									// 処置前の <tr> ==== ココまで ====
-									#endregion
+					#endregion
 
-									#region 処置後の <tr> ==== ココから ====
+					#region 処置後の <tr> ==== ココから ====
 									// 処置後の <tr> ==== ココまで ====
-									#endregion
+					#endregion
 
-									#region EqpInspSubExpItem セット
+					#region EqpInspSubExpItem セット
 									EqpInspSubExpItem eqpInspSubExpItem = new EqpInspSubExpItem();
 									eqpInspSubExpItem.ExpSeqNum = expseqnum;
 									eqpInspSubExpItem.ItemLabel = itemlabel;
@@ -494,28 +551,28 @@ namespace EqpInspService.Controllers
 
 									Array.Resize(ref eqpInspSubItem.EqpInspSubExpItems, eqpInspSubItem.EqpInspSubExpItems.Length + 1);
 									eqpInspSubItem.EqpInspSubExpItems[eqpInspSubItem.EqpInspSubExpItems.Length - 1] = eqpInspSubExpItem;
-									#endregion
+					#endregion
 								}
 
-								#region 処置前の判定の <div> ==== ココから ====
+					#region 処置前の判定の <div> ==== ココから ====
 								// 処置前の判定の <div> ==== ココまで ====
-								#endregion
+					#endregion
 
-								#region 処置後の判定の <div> ==== ココから ====
+					#region 処置後の判定の <div> ==== ココから ====
 								// 処置後の判定の <div> ==== ココまで ====
-								#endregion
+					#endregion
 							}
 							else
 							{
-								#region 処置前の判定の <div> ==== ココから ====
+					#region 処置前の判定の <div> ==== ココから ====
 								// 処置前の判定の <div> ==== ココまで ====
-								#endregion
+					#endregion
 
-								#region 処置後の判定の <div> ==== ココから ====
+					#region 処置後の判定の <div> ==== ココから ====
 								// 処置後の判定の <div> ==== ココまで ====
-								#endregion
+					#endregion
 
-								#region EqpInspSubExpItem セット
+					#region EqpInspSubExpItem セット
 								EqpInspSubExpItem eqpInspSubExpItem = new EqpInspSubExpItem();
 								eqpInspSubExpItem.ExpSeqNum = ""/*expseqnum*/;
 								eqpInspSubExpItem.ItemLabel = ""/*itemlabel*/;
@@ -524,17 +581,17 @@ namespace EqpInspService.Controllers
 
 								Array.Resize(ref eqpInspSubItem.EqpInspSubExpItems, eqpInspSubItem.EqpInspSubExpItems.Length + 1);
 								eqpInspSubItem.EqpInspSubExpItems[eqpInspSubItem.EqpInspSubExpItems.Length - 1] = eqpInspSubExpItem;
-								#endregion
+					#endregion
 							}
 
-							#region bef|afttytle に -hidden- が設定されていた場合の処理
-							#endregion
+					#region bef|afttytle に -hidden- が設定されていた場合の処理
+					#endregion
 						}
 
 						Array.Resize(ref eqpInspItems, eqpInspItems.Length + 1);
 						eqpInspItems[eqpInspItems.Length - 1] = eqpInpsItem;
 					}
-					#endregion
+#endregion
 				}
 			}
 			catch (Exception exp)
@@ -582,8 +639,8 @@ namespace EqpInspService.Controllers
 
 					string sql;
 
-					#region 点検項目履歴
-					#region 装置点検項目履歴を読み込む
+	#region 点検項目履歴
+	#region 装置点検項目履歴を読み込む
 					sql =
 						"select\r\n" +
 						" eqpid,\r\n" +
@@ -615,9 +672,9 @@ namespace EqpInspService.Controllers
 
 					if (eqpInspListDataSet.EQPINSPITEM.Rows.Count == 0)
 						return eqpInspSubLists;
-					#endregion
+	#endregion
 
-					#region 装置点検拡張項目履歴を読み込む
+	#region 装置点検拡張項目履歴を読み込む
 					sql =
 						"select\r\n" +
 						" eqpid,\r\n" +
@@ -648,7 +705,7 @@ namespace EqpInspService.Controllers
 						// 装置点検拡張項目
 						da.Fill(eqpInspListDataSet.EQPINSPITEMEXP);
 					}
-					#endregion
+	#endregion
 
 					// リビジョンの有り無しによって変化する SQL
 					string revision_column = null, revision_table = null, revision_con = null;
@@ -665,7 +722,7 @@ namespace EqpInspService.Controllers
 						revision_con = " and revisionnum=" + revisionnum + "\r\n";
 					}
 
-					#region 装置点検[拡張]項目(EQPINSPITEM[EXP])の履歴から遡って点検項目マスタを検索する
+	#region 装置点検[拡張]項目(EQPINSPITEM[EXP])の履歴から遡って点検項目マスタを検索する
 					var query_item =
 						(from
 						  n in eqpInspListDataSet.EQPINSPITEM.AsEnumerable()
@@ -709,9 +766,9 @@ namespace EqpInspService.Controllers
 						// 点検項目マスタ
 						da.Fill(eqpInspListDataSet.EQPITEMMST_H);
 					}
-					#endregion
+	#endregion
 
-					#region 装置点検[拡張]項目(EQPINSPITEM[EXP])の履歴から遡って点検項目SUBマスタを検索する
+	#region 装置点検[拡張]項目(EQPINSPITEM[EXP])の履歴から遡って点検項目SUBマスタを検索する
 					// 装置点検項目と装置点検拡張項目に含まれるに itemcode と seqnum の組み合わせを抽出する
 					// linq distinct and select new query
 					// https://stackoverflow.com/questions/9992117/linq-distinct-and-select-new-query
@@ -769,9 +826,9 @@ namespace EqpInspService.Controllers
 						// 点検項目SUBマスタ
 						da.Fill(eqpInspListDataSet.EQPITEMSUBMST_H);
 					}
-					#endregion
+	#endregion
 
-					#region 点検項目SUBマスタに紐付いている点検項目SUB拡張マスタを検索する
+	#region 点検項目SUBマスタに紐付いている点検項目SUB拡張マスタを検索する
 					sql = "select\r\n" +
 						  " eqptype,\r\n" +
 						  " itemcode,\r\n" +
@@ -800,7 +857,7 @@ namespace EqpInspService.Controllers
 						// 点検項目SUB拡張マスタ
 						da.Fill(eqpInspListDataSet.EQPITEMSUBEXPMST_H);
 					}
-					#endregion
+	#endregion
 
 					// ITEMCODE(点検項目コード) 分繰り返す
 					foreach (EqpInspListDataSet.EQPITEMMST_HRow eqpitemmst_row in eqpInspListDataSet.EQPITEMMST_H.Rows.OfType<DataRow>())
@@ -818,7 +875,7 @@ namespace EqpInspService.Controllers
 						p = new HtmlGenericControl("p");
 						PanelEQPINSPITEM.Controls.Add(p);
 
-						#region 点検項目ごとの <div> とタイトルの <span>
+	#region 点検項目ごとの <div> とタイトルの <span>
 						HtmlGenericControl divInspItem = new HtmlGenericControl("div");
 						divInspItem.Attributes.Add("class", "inspitem");
 						PanelEQPINSPITEM.Controls.Add(divInspItem);
@@ -828,7 +885,7 @@ namespace EqpInspService.Controllers
 						span.InnerText = itemnm + (subitem1.Length == 0 ? "" : "　" + subitem1) + (subitem2.Length == 0 ? "" : "　" + subitem2);
 						span.Attributes.Add("class", "box-title");
 						divInspItem.Controls.Add(span);
-						#endregion
+	#endregion
 
 						// SEQNUM(シーケンス) 分繰り返す
 						foreach (EqpInspListDataSet.EQPITEMSUBMST_HRow eqpitemsubmst_row in eqpitemsubmst_rows)
@@ -863,7 +920,7 @@ namespace EqpInspService.Controllers
 							HtmlGenericControl dt = new HtmlGenericControl("dt");
 							dl.Controls.Add(dt);
 
-						#region サブタイトル用の <dd> ==== ココから ====
+	#region サブタイトル用の <dd> ==== ココから ====
 							HtmlGenericControl dd = new HtmlGenericControl("dd");
 							dd.ID = "SubItemLabel_" + itemcode_seqnum;  // "SubItemLabel_": サブミット時のコントロール検索で使用されている
 							dd.Attributes.Add("style", "font-weight:bold;font-size:large");
@@ -900,13 +957,13 @@ namespace EqpInspService.Controllers
 								dl.Controls.Add(dd);
 							}
 							// サブタイトル用の <dd> ==== ココまで ====
-						#endregion
+	#endregion
 
 							// 空の <dt></dt>
 							dt = new HtmlGenericControl("dt");
 							dl.Controls.Add(dt);
 
-						#region サブ点検画像の <dd><img> ==== ココから ====
+	#region サブ点検画像の <dd><img> ==== ココから ====
 							if (!string.IsNullOrEmpty(subitemimg))
 							{
 								string _eqptype = eqptype.Replace('+', '_');
@@ -924,35 +981,35 @@ namespace EqpInspService.Controllers
 									dl.Controls.Add(dt);
 								}
 							}
-						#endregion <dd><img> ==== ココまで ====
+	#endregion <dd><img> ==== ココまで ====
 
-						#region 処置前の親要素の <dd> ==== ココから ====
+	#region 処置前の親要素の <dd> ==== ココから ====
 							// ここに <div> で囲んだコントロールを追加していく
 							HtmlGenericControl ddBEFORE = new HtmlGenericControl("dd");
 							ddBEFORE.Attributes.Add("class", "inspsubitem_dd");
 							dl.Controls.Add(ddBEFORE);
-						#endregion 処置前の親要素の <dd> ==== ココまで ====
+	#endregion 処置前の親要素の <dd> ==== ココまで ====
 
-						#region 処置後の親要素の <dd> ==== ココから ====
+	#region 処置後の親要素の <dd> ==== ココから ====
 							// ここに <div> で囲んだコントロールを追加していく
 							HtmlGenericControl ddAFTER = new HtmlGenericControl("dd");
 							ddAFTER.Attributes.Add("class", "inspsubitem_dd");
 							dl.Controls.Add(ddAFTER);
-						#endregion 処置後の親要素の <dd> ==== ココまで ====
+	#endregion 処置後の親要素の <dd> ==== ココまで ====
 
-						#region 処置前項目のタイトルの <div> ==== ココから ====
+	#region 処置前項目のタイトルの <div> ==== ココから ====
 							HtmlGenericControl _div = new HtmlGenericControl("div");
 							_div.InnerText = beftytle;
 							ddBEFORE.Controls.Add(_div);
 							// 処置前項目のタイトルの <dd> ==== ココまで ====
-						#endregion
+	#endregion
 
-						#region 処置後項目のタイトルの <div> ==== ココから ====
+	#region 処置後項目のタイトルの <div> ==== ココから ====
 							_div = new HtmlGenericControl("div");
 							_div.InnerText = afttytle;
 							ddAFTER.Controls.Add(_div);
 							// 処置後項目のタイトルの <div> ==== ココまで ====
-						#endregion
+	#endregion
 
 							string befresult = "", aftresult = "";
 							var eqpinspitem_rows = eqpitemsubmst_row.GetChildRows("EQPITEMSUBMST_EQPINSPITEM");
@@ -968,17 +1025,17 @@ namespace EqpInspService.Controllers
 							{
 								//StringBuilder valuesParam = new StringBuilder();
 
-						#region 処置前の <table>
+	#region 処置前の <table>
 								Table tableBEFORE = new Table();
 								tableBEFORE.CssClass = "inspsubitem_table";
 								ddBEFORE.Controls.Add(tableBEFORE);
-						#endregion
+	#endregion
 
-						#region 処置後の <table
+	#region 処置後の <table
 								Table tableAFTER = new Table();
 								tableAFTER.CssClass = "inspsubitem_table";
 								ddAFTER.Controls.Add(tableAFTER);
-						#endregion
+	#endregion
 
 								// EXPSEQNUM(拡張シーケンス) 分繰り返す
 								foreach (EqpInspListDataSet.EQPITEMSUBEXPMST_HRow eqpitemsubexpmst_row in eqpitemsubexpmst_rows)
@@ -1000,7 +1057,7 @@ namespace EqpInspService.Controllers
 										aftvalue = eqpinspitemexp_row.AFTVALUE;
 									}
 
-						#region 処置前の <tr> ==== ココから ====
+	#region 処置前の <tr> ==== ココから ====
 									TableRow tableRow = new TableRow();
 
 									TableCell tableCell = new TableCell();
@@ -1018,9 +1075,9 @@ namespace EqpInspService.Controllers
 
 									tableBEFORE.Rows.Add(tableRow);
 									// 処置前の <tr> ==== ココまで ====
-						#endregion
+	#endregion
 
-						#region 処置後の <tr> ==== ココから ====
+	#region 処置後の <tr> ==== ココから ====
 									tableRow = new TableRow();
 
 									tableCell = new TableCell();    // <td>
@@ -1038,13 +1095,13 @@ namespace EqpInspService.Controllers
 
 									tableAFTER.Rows.Add(tableRow);
 									// 処置後の <tr> ==== ココまで ====
-						#endregion
+	#endregion
 
 									//valuesParam.Append(valuesParam.Length == 0 ? "" : ",");
 									//valuesParam.Append("{" + "bvID:" + textBoxBEFVALUE.ID + "," + "avID:" + textBoxAFTVALUE.ID + "," + "rc:" + rangectg + "," + "jv1:" + judgvalu1 + "," + "jv2:" + judgvalu2 + "}");
 								}
 
-						#region 処置前の判定の <div> ==== ココから ====
+	#region 処置前の判定の <div> ==== ココから ====
 								_div = new HtmlGenericControl("div");
 								ddBEFORE.Controls.Add(_div);
 
@@ -1059,9 +1116,9 @@ namespace EqpInspService.Controllers
 
 								_div.Controls.Add(dropDownListBEFRESULT);
 								// 処置前の判定の <div> ==== ココまで ====
-						#endregion
+	#endregion
 
-						#region 処置後の判定の <div> ==== ココから ====
+	#region 処置後の判定の <div> ==== ココから ====
 								_div = new HtmlGenericControl("div");
 								ddAFTER.Controls.Add(_div);
 
@@ -1076,11 +1133,11 @@ namespace EqpInspService.Controllers
 
 								_div.Controls.Add(dropDownListAFTRESULT);
 								// 処置後の判定の <div> ==== ココまで ====
-						#endregion
+	#endregion
 							}
 							else
 							{
-						#region 処置前の判定の <div> ==== ココから ====
+	#region 処置前の判定の <div> ==== ココから ====
 								_div = new HtmlGenericControl("div");
 								ddBEFORE.Controls.Add(_div);
 
@@ -1095,9 +1152,9 @@ namespace EqpInspService.Controllers
 
 								_div.Controls.Add(dropDownListBEFRESULT);
 								// 処置前の判定の <div> ==== ココまで ====
-						#endregion
+	#endregion
 
-						#region 処置後の判定の <div> ==== ココから ====
+	#region 処置後の判定の <div> ==== ココから ====
 								_div = new HtmlGenericControl("div");
 								ddAFTER.Controls.Add(_div);
 
@@ -1112,10 +1169,10 @@ namespace EqpInspService.Controllers
 
 								_div.Controls.Add(dropDownListAFTRESULT);
 								// 処置後の判定の <div> ==== ココまで ====
-						#endregion
+	#endregion
 							}
 
-						#region bef|afttytle に -hidden- が設定されていた場合の処理
+	#region bef|afttytle に -hidden- が設定されていた場合の処理
 							if (beftytle == "-hidden-")
 							{
 								ddBEFORE.Controls.Clear();
@@ -1133,7 +1190,7 @@ namespace EqpInspService.Controllers
 								_margin.Attributes.Add("class", "inspsubitem_dd_margin");
 								ddAFTER.Controls.Add(_margin);*/
 							}
-						#endregion
+	#endregion
 
 							if (eqpitemsubmst_row != eqpitemsubmst_rows.Last())
 							{
@@ -1141,8 +1198,8 @@ namespace EqpInspService.Controllers
 								divInspSubITem.Controls.Add(p);
 							}
 #else
-						#region 点検項目ごとの <div> とタイトルの <span>
-						#endregion
+	#region 点検項目ごとの <div> とタイトルの <span>
+	#endregion
 
 						// SEQNUM(シーケンス) 分繰り返す
 						foreach (EqpInspListDataSet.EQPITEMSUBMST_HRow eqpitemsubmst_row in eqpitemsubmst_rows)
@@ -1166,30 +1223,30 @@ namespace EqpInspService.Controllers
 
 							// 空の <dt></dt>
 
-							#region サブタイトル用の <dd> ==== ココから ====
+	#region サブタイトル用の <dd> ==== ココから ====
 							// サブタイトル用の <dd> ==== ココまで ====
-							#endregion
+	#endregion
 
 							// 空の <dt></dt>
 
-							#region サブ点検画像の <dd><img> ==== ココから ====
-							#endregion <dd><img> ==== ココまで ====
+	#region サブ点検画像の <dd><img> ==== ココから ====
+	#endregion <dd><img> ==== ココまで ====
 
-							#region 処置前の親要素の <dd> ==== ココから ====
+	#region 処置前の親要素の <dd> ==== ココから ====
 							// ここに <div> で囲んだコントロールを追加していく
-							#endregion 処置前の親要素の <dd> ==== ココまで ====
+	#endregion 処置前の親要素の <dd> ==== ココまで ====
 
-							#region 処置後の親要素の <dd> ==== ココから ====
+	#region 処置後の親要素の <dd> ==== ココから ====
 							// ここに <div> で囲んだコントロールを追加していく
-							#endregion 処置後の親要素の <dd> ==== ココまで ====
+	#endregion 処置後の親要素の <dd> ==== ココまで ====
 
-							#region 処置前項目のタイトルの <div> ==== ココから ====
+	#region 処置前項目のタイトルの <div> ==== ココから ====
 							// 処置前項目のタイトルの <dd> ==== ココまで ====
-							#endregion
+	#endregion
 
-							#region 処置後項目のタイトルの <div> ==== ココから ====
+	#region 処置後項目のタイトルの <div> ==== ココから ====
 							// 処置後項目のタイトルの <div> ==== ココまで ====
-							#endregion
+	#endregion
 
 							string befresult = "", aftresult = "";
 							var eqpinspitem_rows = eqpitemsubmst_row.GetChildRows("EQPITEMSUBMST_EQPINSPITEM");
@@ -1203,11 +1260,11 @@ namespace EqpInspService.Controllers
 							var eqpitemsubexpmst_rows = eqpitemsubmst_row.GetChildRows("EQPITEMSUBMST_EQPITEMSUBEXPMST");
 							if (eqpitemsubexpmst_rows.Any())  // 何らかの点検項目の入力があった？
 							{
-								#region 処置前の <table>
-								#endregion
+	#region 処置前の <table>
+	#endregion
 
-								#region 処置後の <table>
-								#endregion
+	#region 処置後の <table>
+	#endregion
 
 								// EXPSEQNUM(拡張シーケンス) 分繰り返す
 								foreach (EqpInspListDataSet.EQPITEMSUBEXPMST_HRow eqpitemsubexpmst_row in eqpitemsubexpmst_rows)
@@ -1226,13 +1283,13 @@ namespace EqpInspService.Controllers
 										aftvalue = eqpinspitemexp_row.AFTVALUE;
 									}
 
-									#region 処置前の <tr> ==== ココから ====
+	#region 処置前の <tr> ==== ココから ====
 									// 処置前の <tr> ==== ココまで ====
-									#endregion
+	#endregion
 
-									#region 処置後の <tr> ==== ココから ====
+	#region 処置後の <tr> ==== ココから ====
 									// 処置後の <tr> ==== ココまで ====
-									#endregion
+	#endregion
 
 									// 戻り値
 									EqpInpsSubList eqpinspsublist = new EqpInpsSubList();
@@ -1259,23 +1316,23 @@ namespace EqpInspService.Controllers
 									eqpInspSubLists[eqpInspSubLists.Length - 1] = eqpinspsublist;
 								}
 
-								#region 処置前の判定の <div> ==== ココから ====
+	#region 処置前の判定の <div> ==== ココから ====
 								// 処置前の判定の <div> ==== ココまで ====
-								#endregion
+	#endregion
 
-								#region 処置後の判定の <div> ==== ココから ====
+	#region 処置後の判定の <div> ==== ココから ====
 								// 処置後の判定の <div> ==== ココまで ====
-								#endregion
+	#endregion
 							}
 							else
 							{
-								#region 処置前の判定の <div> ==== ココから ====
+	#region 処置前の判定の <div> ==== ココから ====
 								// 処置前の判定の <div> ==== ココまで ====
-								#endregion
+	#endregion
 
-								#region 処置後の判定の <div> ==== ココから ====
+	#region 処置後の判定の <div> ==== ココから ====
 								// 処置後の判定の <div> ==== ココまで ====
-								#endregion
+	#endregion
 
 								// 戻り値
 								EqpInpsSubList eqpinspsublist = new EqpInpsSubList();
@@ -1302,12 +1359,12 @@ namespace EqpInspService.Controllers
 								eqpInspSubLists[eqpInspSubLists.Length - 1] = eqpinspsublist;
 							}
 
-							#region bef|afttytle に -hidden- が設定されていた場合の処理
-							#endregion
+	#region bef|afttytle に -hidden- が設定されていた場合の処理
+	#endregion
 #endif
 						}
 					}
-					#endregion
+	#endregion
 				}
 			}
 			catch (Exception exp)
@@ -1319,4 +1376,61 @@ namespace EqpInspService.Controllers
 		}
 	}
 #endif
+
+	public class Common
+	{
+		/// <summary>
+		/// text$value 文字列を分解する
+		/// </summary>
+		/// <param name="textValue"></param>
+		/// <param name="_text"></param>
+		/// <param name="_value"></param>
+		public static void GetTextValueFromSettings(string textValue, out string _text, out string _value)
+		{
+			if (textValue.IndexOf("$") == -1)
+			{
+				_text = _value = textValue;
+			}
+			else
+			{
+				string[] item = textValue.Split('$');
+				_text = item[0];
+				_value = item[1];
+			}
+		}
+
+		/// <summary>
+		/// text$value,text$value,... の文字列から case ～ end 分を作成する
+		/// </summary>
+		/// <param name="caseEnd"></param>
+		/// <param name="textValues"></param>
+		/// <param name="columnName"></param>
+		public static void MakeCaseEndSentence(StringBuilder caseEnd, string textValues, string columnName)
+		{
+			if (textValues != null)
+			{
+				caseEnd.Append("case " + columnName + " ");
+
+				foreach (var value in textValues.Split(','))
+				{
+					string _text, _value;
+					GetTextValueFromSettings(value, out _text, out _value);
+					caseEnd.Append("when '" + _value + "' then '" + _text + "' ");
+				}
+
+				caseEnd.Append("else " + columnName + " ");
+
+				if (columnName.IndexOf('.') != -1)
+				{
+					columnName = columnName.Substring(columnName.IndexOf('.') + 1); // テーブル別名指定があれば削除する
+				}
+				caseEnd.Append("end " + columnName);
+			}
+			else
+			{
+				caseEnd.Append(columnName);
+			}
+		}
+	}
+
 }

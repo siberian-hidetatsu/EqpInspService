@@ -1,4 +1,5 @@
-﻿using System;
+﻿#define	UPDATE_20210519
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -33,6 +34,13 @@ namespace EqpInspService.Controllers
 			EqpTypeId[] eqpTypeIds = new EqpTypeId[0];
 
 			string streportdate = stdate.Substring(0, 4) + "/" + stdate.Substring(4, 2) + "/" + stdate.Substring(6, 2);
+
+#if UPDATE_20210519
+				if ( interval.Length > 1 )
+				{
+					interval = interval[0].ToString();
+				}
+#endif
 
 			try
 			{
