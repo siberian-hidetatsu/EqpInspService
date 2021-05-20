@@ -1,4 +1,5 @@
-﻿using System;
+﻿#define	UPDATE_20210520
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -30,6 +31,27 @@ namespace EqpInspService.Models
 
 	}
 
+#if UPDATE_20210520
+	public class EqpInpsItem
+	{
+		public string ItemCode { get; set; }
+		public string ItemName { get; set; }
+
+		public EqpInspSubItem[] EqpInspSubItems;
+	}
+
+	public class EquipInspec
+	{
+		public string EqpType { get; set; }
+
+		public string InspectionName { get; set; }
+
+		public string Result { get; set; }
+
+		public EqpInpsItem[] EqpInspItems;
+
+	}
+#else
 	public class EqpInpsItem
 	{
 		public string EqpType { get; set; }
@@ -38,6 +60,7 @@ namespace EqpInspService.Models
 
 		public EqpInspSubItem[] EqpInspSubItems;
 	}
+#endif
 
 #else
 	public class EqpInpsSubList
